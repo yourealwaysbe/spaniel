@@ -59,6 +59,9 @@ if __name__ == '__main__':
     abook = arguments['--abook']
     query = arguments['<query_string>']
 
+    # First line of output ignored
+    print()
+
     if query is not None and len(query) > 0:
         if isfile(abook):
             query_file(abook, query)
