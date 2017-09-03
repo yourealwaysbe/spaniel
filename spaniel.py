@@ -17,8 +17,10 @@ from os.path import isdir, isfile, join
 from docopt import docopt
 import vobject
 
+
 def vcard_match(vcard, query):
     return query.upper() in str(vcard).upper()
+
 
 def process_vcard(vcard, query):
     if vcard_match(vcard, query):
