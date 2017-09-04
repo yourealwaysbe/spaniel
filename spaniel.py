@@ -13,6 +13,7 @@ Options:
 
 from os import listdir
 from os.path import isdir, isfile, join
+import sys
 
 from docopt import docopt
 import vobject
@@ -22,17 +23,24 @@ def vcard_match(vcard, query):
     return query.upper() in str(vcard).upper()
 
 
+def entry_output(email, name):
+    sys.stdout.write(email.strip())
+    sys.stdout.write('\t')
+    sys.stdout.write(name.strip())
+    sys.stdout.write('\t\n')
+
+
 def process_vcard(vcard, query):
     if vcard_match(vcard, query):
         name = '<no name>'
         if hasattr(vcard, 'n'):
-            name = vcard.n.value
+            name = str(vcard.n.value)
 
         if hasattr(vcard, 'email_list'):
             for email in vcard.email_list:
-                print(email.value, '\t', name)
+                entry_output(email.value, name)
         elif hasattr(vcard, 'email'):
-            print(vcard.email.value, '\t', name)
+            entry_output(vcard.email.value, name)
 
 
 def query_directory(dirname, query):
@@ -60,7 +68,7 @@ if __name__ == '__main__':
     query = arguments['<query_string>']
 
     # First line of output ignored
-    print()
+    print('Searching...')
 
     if query is not None and len(query) > 0:
         if isfile(abook):
