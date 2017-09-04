@@ -49,7 +49,7 @@ def query_directory(dirname, query):
 
 
 def query_file(filename, query):
-    for vcard in vobject.readComponents(open(filename, 'r')):
+    for vcard in vobject.base.readComponents(open(filename, 'r')):
         process_vcard(vcard, query)
 
 
