@@ -44,7 +44,6 @@ def process_vcard(vcard, query):
 
 
 def query_directory(dirname, query):
-
     for f in listdir(dirname):
         filename = join(dirname, f)
 
