@@ -130,8 +130,9 @@ async function searchDirectory(abook, query) {
 async function doSearch(abook, query) {
     const lstat = util.promisify(fs.lstat)
 
-    const stats = await lstat(abook)
+    console.log("Searching...")
 
+    const stats = await lstat(abook)
     if (stats.isFile()) {
         await searchFile(abook, query)
     } else if (stats.isDirectory()) {
